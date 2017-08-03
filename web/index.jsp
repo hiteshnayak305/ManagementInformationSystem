@@ -3,9 +3,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Welcome to MIS</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        index page<br><br><br>
+        <a href="registerForm?who=student">register student</a>
+        <a href="registerForm?who=company">register company</a>
+        
     </body>
 </html>
