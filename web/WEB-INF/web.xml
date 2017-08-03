@@ -4,9 +4,25 @@
         <servlet-name>RegisterFormController</servlet-name>
         <servlet-class>controller.RegisterFormController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterController</servlet-name>
+        <servlet-class>controller.RegisterController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterStudentController</servlet-name>
+        <servlet-class>controller.student.RegisterStudentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterFormController</servlet-name>
         <url-pattern>/registerForm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterController</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterStudentController</servlet-name>
+        <url-pattern>/registerStudent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
