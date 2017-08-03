@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <!--     servlet mappings           -->
     <servlet>
         <servlet-name>RegisterFormController</servlet-name>
         <servlet-class>controller.RegisterFormController</servlet-class>
@@ -11,6 +12,10 @@
     <servlet>
         <servlet-name>RegisterStudentController</servlet-name>
         <servlet-class>controller.student.RegisterStudentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>error.ErrorHandler</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterFormController</servlet-name>
@@ -24,12 +29,36 @@
         <servlet-name>RegisterStudentController</servlet-name>
         <url-pattern>/registerStudent</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorHandler</servlet-name>
+        <url-pattern>/ErrorHandler</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    
+    
+    <!--    session configuration  -->
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <!--   welcome file    -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <!--   Error Handler   -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ErrorHandler</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/ErrorHandler</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type> <!-- generic exception handlling -->
+        <location>/ErrorHandler</location>
+    </error-page>
 </web-app>
