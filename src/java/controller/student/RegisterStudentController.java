@@ -33,14 +33,13 @@ public class RegisterStudentController extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
-     * @throws java.text.ParseException
+     * @throws java.io.IOException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ParseException {
-        
-        String rollNumber = request.getParameter("roll_number");
+            throws ServletException, IOException {
+
+        try {
+            String rollNumber = request.getParameter("roll_number");
             String firstName = request.getParameter("first_name");
             String middleName = request.getParameter("middle_name");
             String lastName = request.getParameter("last_name");
@@ -50,16 +49,19 @@ public class RegisterStudentController extends HttpServlet {
             Double cpi = Double.parseDouble(request.getParameter("cpi"));
             Double spi = Double.parseDouble(request.getParameter("spi"));
             String photo = request.getParameter("image");
-            
-            Student student = new Student(0,rollNumber,firstName,middleName,lastName,branch,dateOfBirth,cpi,spi,photo);
-            
+
+            Student student = new Student(0, rollNumber, firstName, middleName, lastName, branch, dateOfBirth, cpi, spi, photo);
+
             AddStudentQuery add = new AddStudentQuery();
             int status = add.doAddStudent(student);
-            
+
             String url = "/";
-            
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
             requestDispatcher.forward(request, response);
+        } catch (ParseException | SQLException ex) {
+            Logger.getLogger(RegisterStudentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,11 +76,7 @@ public class RegisterStudentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException | ParseException ex) {
-            Logger.getLogger(RegisterStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -92,11 +90,7 @@ public class RegisterStudentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException | ParseException ex) {
-            Logger.getLogger(RegisterStudentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

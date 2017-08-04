@@ -47,11 +47,15 @@ public class ErrorHandler extends HttpServlet {
         //set attributes
         request.setAttribute("throwable", throwable);
         request.setAttribute("status_code", (int) statusCode);
-        request.setAttribute("exception_type",  exceptionType);
+        if (exceptionType != null) {
+            request.setAttribute("exception_type", exceptionType.getName());
+        }else{
+            request.setAttribute("exception_type", null);
+        }
         request.setAttribute("exception_message", exceptionMessage);
         request.setAttribute("servlet_name", servletName);
         request.setAttribute("request_uri", requestUri);
-        
+
         String url = "WEB-INF/jsp/error.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
         requestDispatcher.forward(request, response);
